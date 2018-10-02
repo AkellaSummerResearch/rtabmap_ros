@@ -1544,8 +1544,7 @@ void CoreWrapper::process(
 			{
 				// Publish local graph, info
 				this->publishStats(stamp);
-				if(localizationPosePub_.getNumSubscribers() &&
-					!rtabmap_.getStatistics().localizationCovariance().empty())
+				if( !rtabmap_.getStatistics().localizationCovariance().empty())
 				{
 					geometry_msgs::PoseWithCovarianceStamped poseMsg;
 					poseMsg.header.frame_id = mapFrameId_;

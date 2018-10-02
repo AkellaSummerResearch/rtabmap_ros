@@ -110,7 +110,7 @@
 
   <!-- Nodes -->
   <group ns="$(arg namespace)">
-    
+     
     <!-- relays -->
     <group unless="$(arg stereo)">
       <group unless="$(arg subscribe_rgbd)">
@@ -253,8 +253,9 @@
       <param name="config_path"          type="string" value="$(arg cfg)"/>
       <param name="queue_size"           type="int" value="$(arg queue_size)"/>
       <param name="scan_normal_k"        type="int" value="$(arg scan_normal_k)"/>
-      <param name="Rtabmap/LoopThr" type="double" value=".2"/>
-
+      <param name="Rtabmap/LoopThr" type="double" value=".000001"/>
+      <param name="RGBD/OptimizeMaxError"                type="double"      value=".00001"  />
+      
       <remap from="rgb/image"       to="$(arg rgb_topic_relay)"/>
       <remap from="depth/image"     to="$(arg depth_topic_relay)"/>
       <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
@@ -294,7 +295,8 @@
       <param name="wait_for_transform_duration" type="double"   value="$(arg wait_for_transform)"/>
       <param name="queue_size"           type="int"    value="$(arg queue_size)"/>
       <param name="approx_sync"          type="bool"   value="$(arg approx_sync)"/>
-    
+      
+
       <remap from="rgb/image"       to="$(arg rgb_topic_relay)"/>
       <remap from="depth/image"     to="$(arg depth_topic_relay)"/>
       <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
@@ -311,7 +313,7 @@
       <remap from="scan_cloud"             to="$(arg scan_cloud_topic)"/>
       <remap from="odom"                   to="$(arg odom_topic)"/>
     </node>
-    <param name="Vis/MinInliers" type="int" value="5"/>
+  
   </group>
   
   <!-- Visualization RVIZ -->
@@ -328,7 +330,7 @@
     <remap unless="$(arg rgbd_sync)" from="rgbd_image" to="$(arg rgbd_topic)_relay"/>
     <remap from="cloud"             to="voxel_cloud" />
 
-    <param name="decimation"  type="double" value="10"/>
+    <param name="decimation"  type="double" value="4"/>
     <param name="voxel_size"  type="double" value="0.0"/>
     <param name="approx_sync" type="bool"   value="$(arg approx_sync)"/>
   </node>
